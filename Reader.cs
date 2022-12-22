@@ -14,7 +14,7 @@ public class Reader<T> : IReader<T> where T : class {
     }
     
     public virtual async Task<ReadOnlyCollection<T>> GetAllAsync(string where = "", object? args = null, int pageSize = 0, int pageNum = 1, string orderBy = "") {
-        var sql = sqlBuilder.GetSelectSql(where, pageSize, pageNum-1);
+        var sql = sqlBuilder.GetSelectSql(where, pageSize, pageNum);
         using var conn = dbConnectionService.CreateConnection();
         var result = await conn.QueryAsync<T>(sql, args).ConfigureAwait(false);
         return result.ToList().AsReadOnly();

@@ -23,8 +23,7 @@ public class DatabaseMapper {
         tableInfos.Add(type,newTableInfo );
         return newTableInfo;
     }
-    public ITableInfo GetTableInfo(Type entityType)
-    {
+    public ITableInfo GetTableInfo(Type entityType) {
         if (tableInfos.ContainsKey(entityType)) return tableInfos[entityType];
         var newTableInfo = Activator.CreateInstance(typeof(TableInfo<>).MakeGenericType(entityType));
         if (newTableInfo is null) throw new InvalidOperationException($"Could not create TableInfo<{entityType}>");
